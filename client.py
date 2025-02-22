@@ -12,9 +12,9 @@ client_socket.connect((HOST, PORT))
 print(f"Connected to server {HOST}:{PORT}")
 
 def split_data(tcp_data):
-    print("TCP_data: ", tcp_data)
+    # print("TCP_data: ", tcp_data)
     star_part = tcp_data.split('**')  # แยกข้อมูลด้วย '**'
-    print("star_part: ",star_part)
+    # print("star_part: ",star_part)
     for idx, part in enumerate(star_part):
         tab_part = part.split()  # แยกข้อมูลในแต่ละส่วนด้วยช่องว่าง
         count = get_count_from_env(record_path)
@@ -57,6 +57,7 @@ def split_data(tcp_data):
                     out_status = 'nm' #10
             break
         elif(idx == len(star_part) - 1):
+            print("last")
             if count == 0:
                 error_msg = f"Cannot read frist pallet"
             else:
@@ -64,7 +65,7 @@ def split_data(tcp_data):
             msg_color = 'white' #8
             msg_bg = 'red' #9
             out_status = 'ng' #10
-    print("error_msg: ",error_msg)
+    # print("error_msg: ",error_msg)
     count = get_count_from_env(record_path)
     total_master = get_total_master(record_path)
     if count <=0:
@@ -102,7 +103,7 @@ def split_data(tcp_data):
         time.sleep(0.2)
     conv_status = 'run'
     save_to_show(invoice_master,total_master_show,count_show,model_show,box_number_show,error_msg,conv_status,msg_color,msg_bg,show_path)
-    
+    print(out_status)
     return out_status
 
 def get_count_from_env(path):
