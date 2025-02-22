@@ -1,0 +1,20 @@
+conda --version
+conda create --name scan_pallet python=3.11
+conda env list
+conda activate scan_pallet
+conda deactivate
+conda remove --name ชื่อ_environment --all
+conda list
+conda list -n scan_pallet
+conda info
+
+conda install jupyter
+- เลือก Interpreter ของ Python
+เปิด Command Palette โดยกด Ctrl + Shift + P
+พิมพ์ Python: Select Interpreter
+เลือก Interpreter ที่ใช้ (เช่น Environment ที่มี Jupyter ติดตั้ง)
+
+pip freeze > requirements.txt
+pip install -r requirements.txt
+
+
