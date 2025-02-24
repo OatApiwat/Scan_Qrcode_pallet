@@ -350,18 +350,21 @@ def record_to_store(path):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+def main():
+    try:
+        while True:
+            data = client_socket.recv(1024)
+            if not data:  # ถ้าไม่ได้รับข้อมูล แสดงว่าเซิร์ฟเวอร์ปิดการเชื่อมต่อ
+                break
+            msg = data.decode()
+            out_status = split_data(msg)
+            client_socket.sendall(out_status.encode('utf-8')) #sent data to server
+            # print(f"Received from server: {msg}")
+    except KeyboardInterrupt:
+        print("\nDisconnected from server.")  # เมื่อกด Ctrl + C จะแสดงข้อความนี้
+    finally:
+        client_socket.close()
+        print("Connection closed")
 
-try:
-    while True:
-        data = client_socket.recv(1024)
-        if not data:  # ถ้าไม่ได้รับข้อมูล แสดงว่าเซิร์ฟเวอร์ปิดการเชื่อมต่อ
-            break
-        msg = data.decode()
-        out_status = split_data(msg)
-        client_socket.sendall(out_status.encode('utf-8'))
-        # print(f"Received from server: {msg}")
-except KeyboardInterrupt:
-    print("\nDisconnected from server.")  # เมื่อกด Ctrl + C จะแสดงข้อความนี้
-finally:
-    client_socket.close()
-    print("Connection closed")
+if __name__ == "__main__":
+    main()
